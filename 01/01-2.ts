@@ -11,28 +11,26 @@ const window = 3;
 console.log(solve(depths));
 
 function solve(depths: number[]): number {
-  const measurements: number[] = getMeasurements(depths);
-  return getIncreasedCount(measurements);
+  const windowSums: number[] = getWindowSums(depths);
+  return getIncreasedCount(windowSums);
 }
 
-function getMeasurements(depths: number[]): number[] {
-  const measurements: number[] = [];
+function getWindowSums(depths: number[]): number[] {
+  const windowSums: number[] = [];
   for (let i = window - 1; i < depths.length; i++) {
-    let sum = 0;
+    let windowSum = 0;
     for (let j = 0; j < window; j++) {
-      sum += depths[i - j];
+      windowSum += depths[i - j];
     }
-    measurements.push(sum);
+    windowSums.push(windowSum);
   }
-  return measurements;
+  return windowSums;
 }
 
-function getIncreasedCount(measurements: number[]): number {
+function getIncreasedCount(data: number[]): number {
   let increasedCount = 0;
-  for (let i = 1; i < measurements.length; i++) {
-    const previousMeasurement = measurements[i - 1];
-    const currentMeasurement = measurements[i];
-    if (currentMeasurement > previousMeasurement) {
+  for (let i = 1; i < data.length; i++) {
+    if (data[i] > data[i - 1]) {
       increasedCount++;
     }
   }
