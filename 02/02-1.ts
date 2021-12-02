@@ -22,29 +22,34 @@ const commands: Command[] = readFileSync(inputFile, 'utf8')
     units: +unitsStr,
   }));
 
-const initialPosition: Position = {
-  horizontal: 0,
-  depth: 0,
-};
+console.log(solve(commands));
 
-console.log(solve(initialPosition, commands));
+function solve(commands: Command[]): number {
+  const initialPosition: Position = {
+    horizontal: 0,
+    depth: 0,
+  };
+  const newPosition = applyCommands(initialPosition, commands);
+  return newPosition.horizontal * newPosition.depth;
+}
 
-function solve(position: Position, commands: Command[]): number {
+function applyCommands(position: Position, commands: Command[]): Position {
+  const newPosition = { ...position };
   for (const command of commands) {
     switch (command.direction) {
       case 'forward': {
-        position.horizontal += command.units;
+        newPosition.horizontal += command.units;
         break;
       }
       case 'down': {
-        position.depth += command.units;
+        newPosition.depth += command.units;
         break;
       }
       case 'up': {
-        position.depth -= command.units;
+        newPosition.depth -= command.units;
         break;
       }
     }
   }
-  return position.horizontal * position.depth;
+  return newPosition;
 }
