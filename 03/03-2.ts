@@ -20,9 +20,9 @@ function getRating(report: string[], molecule: Molecule): string | undefined {
     report = report.filter(binary => {
       switch (molecule) {
         case 'oxygen':
-          return binary[i] === ((sum >= report.length / 2) ? '1' : '0')
+          return binary[i] === ((sum >= report.length / 2) ? '1' : '0');
         case 'co2':
-          return binary[i] === ((sum >= report.length / 2) ? '0' : '1')
+          return binary[i] === ((sum >= report.length / 2) ? '0' : '1');
       }
     });
     if (report.length === 1) return report[0];
