@@ -20,7 +20,7 @@ const boards: Cell[][][] = data.slice(1)
 
 console.log(solve(boards, drawNumbers));
 
-function solve(boards: Cell[][][], drawNumbers: number[]): number | undefined {
+function solve(boards: Cell[][][], drawNumbers: number[]): number | void {
   for (const drawNumber of drawNumbers) {
     for (const board of boards) {
       markBoard(board, drawNumber);

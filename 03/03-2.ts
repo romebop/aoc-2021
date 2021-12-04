@@ -14,7 +14,7 @@ function solve(report: string[]): number {
   return parseInt(oxygenRating, 2) * parseInt(co2Rating, 2);
 }
 
-function getRating(report: string[], molecule: Molecule): string | undefined {
+function getRating(report: string[], molecule: Molecule): string | void {
   for (let i = 0; i < report[0].length; i++) {
     const sum = report.reduce((sum, binary) => sum + +binary[i], 0);
     report = report.filter(binary => {
