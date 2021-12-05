@@ -44,7 +44,7 @@ function markBoard(board: Cell[][], drawNumber: number): void {
 function isSolvedBoard(board: Cell[][]): boolean {
   for (let y = 0; y < board.length; y++) {
     let isSolved = true;
-    for (let x = 0; x < board.length; x++) {
+    for (let x = 0; x < board[0].length; x++) {
       isSolved &&= board[y][x].isMarked;
     }
     if (isSolved) return true;
