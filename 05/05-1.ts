@@ -2,8 +2,6 @@ import { readFileSync } from 'fs';
 
 const inputFile = process.argv.slice(2)[0];
 
-const data = readFileSync(inputFile, 'utf8').split('\n\n');
-
 interface Point {
   x: number;
   y: number;
@@ -14,7 +12,7 @@ interface Line {
   p2: Point;
 }
 
-const lines: Line[] = data[0].split('\n')
+const lines: Line[] = readFileSync(inputFile, 'utf8').split('\n')
   .map(lineStr => {
     const [p1, p2]: Point[] = lineStr.split(' -> ')
       .map(pointStr => {
