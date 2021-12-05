@@ -20,7 +20,6 @@ const lines: Line[] = data[0].split('\n')
       .map(pointStr => {
         const [xStr, yStr] = pointStr.split(',');
         return { x: +xStr, y: +yStr };
-     
       });
     return { p1, p2 };
   });
