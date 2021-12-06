@@ -29,7 +29,6 @@ function solve(lines: Line[]): number {
   const map: { [key: string]: number } = {};
   for (const line of lines) {
     const currPoint = { ...line.p1 };
-    recordPoint(line.p2, map);
     while (!isSamePoint(currPoint, line.p2)) {
       recordPoint(currPoint, map);
       if (line.p2.x > currPoint.x) currPoint.x++;
@@ -37,6 +36,7 @@ function solve(lines: Line[]): number {
       if (line.p2.y > currPoint.y) currPoint.y++;
       if (line.p2.y < currPoint.y) currPoint.y--;
     }
+    recordPoint(line.p2, map);
   }
   return Object.keys(map).reduce((count, point) => (
     count + (map[point] >= 2 ? 1 : 0) 
