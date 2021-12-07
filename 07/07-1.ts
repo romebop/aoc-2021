@@ -8,13 +8,17 @@ const posList: number[] = readFileSync(inputFile, 'utf8').split(',')
 console.log(solve(posList));
 
 function solve(posList: number[]): number {
-  const alignPos = getMedian([...posList]);
-  return posList.reduce((fuel, pos) => fuel + Math.abs(pos - alignPos), 0);
+  const alignPos = getMedian(posList);
+  return posList.reduce((fuel, pos) => (
+    fuel + Math.abs(pos - alignPos)
+  ), 0);
 }
 
 function getMedian(values: number[]): number {
-  values.sort((a, b) => a > b ? 1 : -1);
-  const half = Math.floor(values.length / 2)
-  if (values.length % 2 === 1) return values[half];
-  return (values[half - 1] + values[half]) / 2
+  const sortedValues = [...values].sort((a, b) => a > b ? 1 : -1);
+  const half = Math.floor(sortedValues.length / 2)
+  if (sortedValues.length % 2 === 1) {
+    return sortedValues[half];
+  }
+  return (sortedValues[half - 1] + sortedValues[half]) / 2
 }

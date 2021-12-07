@@ -8,15 +8,11 @@ const posList: number[] = readFileSync(inputFile, 'utf8').split(',')
 console.log(solve(posList));
 
 function solve(posList: number[]): number {
-  posList.sort((a, b) => a > b ? 1 : -1);
-  const minPos = posList[0];
-  const maxPos = posList[posList.length - 1];
+  const minPos = Math.min(...posList);
+  const maxPos = Math.max(...posList);
   let minTotalFuel = Infinity;
-  for (let pos = minPos; pos <= maxPos; pos++) {
-    const currTotalFuel = getTotalFuel(posList, pos);
-    if (currTotalFuel < minTotalFuel) {
-      minTotalFuel = currTotalFuel;
-    }
+  for (let testPos = minPos; testPos <= maxPos; testPos++) {
+    minTotalFuel = Math.min(getTotalFuel(posList, testPos), minTotalFuel);
   }
   return minTotalFuel;
 }
