@@ -16,9 +16,9 @@ function solve(posList: number[]): number {
 
 function getMedian(values: number[]): number {
   const sortedValues = [...values].sort((a, b) => a > b ? 1 : -1);
-  const half = Math.floor(sortedValues.length / 2)
+  const halfIdx = Math.floor(sortedValues.length / 2)
   if (sortedValues.length % 2 === 1) {
-    return sortedValues[half];
+    return sortedValues[halfIdx];
   }
-  return (sortedValues[half - 1] + sortedValues[half]) / 2
+  return (sortedValues[halfIdx - 1] + sortedValues[halfIdx]) / 2
 }
