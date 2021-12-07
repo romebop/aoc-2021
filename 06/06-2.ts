@@ -7,7 +7,7 @@ const ages: number[] = readFileSync(inputFile, 'utf8').split(',')
 
 const numDays = 256;
 const lenCycle = 7;
-const lenFirstCycle = lenCycle + 2
+const lenFirstCycle = lenCycle + 2;
 
 console.log(solve(ages, numDays, lenCycle, lenFirstCycle));
 
@@ -15,7 +15,7 @@ function solve(
   ages: number[],
   numDays: number,
   lenCycle: number,
-  lenFirstCycle: number
+  lenFirstCycle: number,
 ) {
   const maxAge = Math.max(lenCycle - 1, lenFirstCycle - 1);
   let ageCountMap = initAgeCountMap(maxAge);

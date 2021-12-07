@@ -5,7 +5,7 @@ const inputFile = process.argv.slice(2)[0];
 const ages: number[] = readFileSync(inputFile, 'utf8').split(',')
   .map(e => +e);
 
-  const numDays = 80;
+const numDays = 80;
 
 console.log(solve(ages, numDays));
 
