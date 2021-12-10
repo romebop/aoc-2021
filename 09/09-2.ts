@@ -56,6 +56,6 @@ function getAdjacentPoints(heightMap: number[][], { x, y }: Point): Point[] {
   return adjacentPoints;
 }
 
-function serializePoint({ x, y }: Point) {
+function serializePoint({ x, y }: Point): string {
   return `(${x},${y})`;
 }
