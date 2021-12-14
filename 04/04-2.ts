@@ -60,7 +60,7 @@ function isSolvedBoard(board: Cell[][]): boolean {
   for (let x = 0; x < board[0].length; x++) {
     let isSolved = true;
     for (let y = 0; y < board.length; y++) {
-      isSolved &&= board[y][x].isMarked; 
+      isSolved &&= board[y][x].isMarked;
     }
     if (isSolved) return true;
   }
@@ -75,13 +75,13 @@ function getUnmarkedSum(board: Cell[][]): number {
   ), 0);
 }
 
-function printBoard(board: Cell[][]): void {
-  for (const row of board) {
-    console.log(
-      row.map(cell => cell.isMarked
-        ? `[${cell.value}:x]`
-        : `[${cell.value}:o]`
-      ).join(' ')
-    );
-  }
-}
+// function printBoard(board: Cell[][]): void {
+//   for (const row of board) {
+//     console.log(
+//       row.map(cell => cell.isMarked
+//         ? `[${cell.value}:x]`
+//         : `[${cell.value}:o]`
+//       ).join(' ')
+//     );
+//   }
+// }

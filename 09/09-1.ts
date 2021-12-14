@@ -13,7 +13,7 @@ function solve(heightMap: number[][]): number {
     for (let x = 0; x < heightMap[0].length; x++) {
       if (isLowPoint(heightMap, x, y)) {
         riskLevels.push(1 + heightMap[y][x]);
-      } 
+      }
     }
   }
   return riskLevels.reduce((a, c) => a + c, 0);

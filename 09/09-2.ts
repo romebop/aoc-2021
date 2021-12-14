@@ -35,7 +35,7 @@ function getLowPoints(heightMap: number[][]): Point[] {
       const point = { x, y };
       if (isLowPoint(heightMap, point)) {
         lowPoints.push(point);
-      } 
+      }
     }
   }
   return lowPoints;

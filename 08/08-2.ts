@@ -69,7 +69,7 @@ function getOutput(entry: Entry): number {
 function numCommonChars(s1: string, s2: string): number {
   return s1.split('').reduce((n, c) => (
     n + (s2.includes(c) ? 1 : 0)
-  ), 0)
+  ), 0);
 }
 
 function includesChars(targetStr: string, testStr: string): boolean {

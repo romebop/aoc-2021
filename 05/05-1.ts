@@ -44,7 +44,7 @@ function solve(lines: Line[]): number {
 }
 
 function isSamePoint(p1: Point, p2: Point): boolean {
-  return (p1.x === p2.x) && (p1.y === p2.y); 
+  return (p1.x === p2.x) && (p1.y === p2.y);
 }
 
 function recordPoint(point: Point, map: { [key: string]: number }): void {

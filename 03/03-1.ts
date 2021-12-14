@@ -11,8 +11,8 @@ function solve(report: string[]): number {
   let epsilonRate = '';
   for (let i = 0; i < report[0].length; i++) {
     const sum = report.reduce((sum, binary) => sum + +binary[i], 0);
-    gammaRate += (sum > report.length / 2) ? '1': '0';
-    epsilonRate += (sum < report.length / 2) ? '1': '0';
+    gammaRate += (sum > report.length / 2) ? '1' : '0';
+    epsilonRate += (sum < report.length / 2) ? '1' : '0';
   }
   return parseInt(gammaRate, 2) * parseInt(epsilonRate, 2);
 }

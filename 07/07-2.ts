@@ -25,5 +25,5 @@ function getTotalFuel(posList: number[], targetPos: number): number {
 
 function getFuel(pos1: number, pos2: number) {
   const diff = Math.abs(pos1 - pos2);
-  return diff * (1 + diff) / 2;
+  return (diff / 2) * (1 + diff);
 }
