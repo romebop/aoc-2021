@@ -20,27 +20,25 @@ console.log(solve(template, insertMap, numSteps));
 
 function solve(template: string, insertMap: Map<string, string>, numSteps: number): number {
   let pairCountMap = initPairCountMap(template);
-  const countMap = initCountMap(template);
+  const charCountMap = initCharCountMap(template);
   for (let step = 0; step < numSteps; step++) {
     const newPairCountMap = new Map<string, number>();
     for (const pair of pairCountMap.keys()) {
       const pairCount = pairCountMap.get(pair)!;
       if (insertMap.has(pair)) {
         const char = insertMap.get(pair)!;
-        // update newPairCountMap
         const genPair1 = pair[0] + char;
         const genPair2 = char + pair[1];
         newPairCountMap.set(genPair1, (newPairCountMap.get(genPair1) ?? 0) + pairCount);
         newPairCountMap.set(genPair2, (newPairCountMap.get(genPair2) ?? 0) + pairCount);
-        // update countMap
-        countMap.set(char, (countMap.get(char) ?? 0) + pairCount);
+        charCountMap.set(char, (charCountMap.get(char) ?? 0) + pairCount);
       } else {
         newPairCountMap.set(pair, pairCount);
       }
     }
     pairCountMap = newPairCountMap;
   }
-  return Math.max(...countMap.values()) - Math.min(...countMap.values());
+  return Math.max(...charCountMap.values()) - Math.min(...charCountMap.values());
 }
 
 function initPairCountMap(template: string): Map<string, number> {
@@ -52,10 +50,10 @@ function initPairCountMap(template: string): Map<string, number> {
   return pairCountMap;
 }
 
-function initCountMap(template: string): Map<string, number> {
-  const countMap = new Map<string, number>();
+function initCharCountMap(template: string): Map<string, number> {
+  const charCountMap = new Map<string, number>();
   for (const char of template) {
-    countMap.set(char, (countMap.get(char) ?? 0) + 1);
+    charCountMap.set(char, (charCountMap.get(char) ?? 0) + 1);
   }
-  return countMap;
+  return charCountMap;
 }
