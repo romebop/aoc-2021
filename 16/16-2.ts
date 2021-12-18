@@ -45,7 +45,7 @@ function getPacket(bin: string): Packet | void {
           args.push(packet.val);
         }
       }
-      if (lenType === '1') { // lenType === '1'
+      if (lenType === '1') {
         const numSubPacs = parseInt(bin.slice(p, p + 11), 2);
         p += 11;
         for (let i = 0; i < numSubPacs; i++) {
