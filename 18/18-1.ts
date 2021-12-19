@@ -69,11 +69,7 @@ function getExplodingPairParent(num: SnailNum | number, explodingPair: SnailNum)
   return getExplodingPairParent(num[0], explodingPair) ?? getExplodingPairParent(num[1], explodingPair);
 }
 
-function getLeafPairs(
-  num: SnailNum | number,
-  result = new Set<SnailNum>(),
-  parent: SnailNum | null = null
-): SnailNum[] | void {
+function getLeafPairs(num: SnailNum | number, result = new Set<SnailNum>(), parent: SnailNum | null = null): SnailNum[] | void {
   if (!Array.isArray(num)) {
     result.add(parent!);
     return;
