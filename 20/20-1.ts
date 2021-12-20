@@ -11,7 +11,7 @@ const image: string[][] = data[1].split('\n')
 
 const doesToggle: boolean = imageEnhancementAlgorithmString[0] === '#';
 
-type Mode = 'lit' | 'unlit' | null;
+type Mode = 'lit' | 'unlit';
 
 type Point = { x: number, y: number };
 
@@ -36,25 +36,25 @@ function getLitSet(image: string[][]): Set<string> {
 
 function solve(litSet: Set<string>, ieas: string, applyCount: number, doesToggle: boolean): number {
   let unlitSet: Set<string>;
-  printImage(litSet, 'lit');
+  console.log(getImageStr(litSet, 'lit'));
   for (let applyStep = 1; applyStep <= applyCount; applyStep++) {
     if (doesToggle) {
       if (applyStep % 2 === 1) {
         unlitSet = enhanceImage(litSet, ieas, true, 'unlit');
-        printImage(unlitSet, 'unlit');
+        console.log(getImageStr(unlitSet, 'unlit'));
       } else {
         litSet = enhanceImage(unlitSet!, ieas, true, 'lit');
-        printImage(litSet, 'lit');
+        console.log(getImageStr(litSet, 'lit'));
       }
     } else {
       litSet = enhanceImage(litSet, ieas);
-      printImage(litSet, 'lit');
+      console.log(getImageStr(litSet, 'lit'));
     }
   }
   return litSet.size;
 }
 
-function enhanceImage(set: Set<string>, ieas: string, doesToggle = false, mode: Mode = null): Set<string> {
+function enhanceImage(set: Set<string>, ieas: string, doesToggle = false, mode: Mode = 'lit'): Set<string> {
   const newSet = new Set<string>();
   if (doesToggle) {
     if (mode === 'unlit') {
@@ -118,7 +118,7 @@ function deserializePoint(sp: string): Point {
   return { x, y };
 }
 
-function printImage(set: Set<string>, mode: Mode, padding = 4): void {
+function getImageStr(set: Set<string>, mode: Mode, padding = 4): string {
   let points = [...set].map(deserializePoint);
   const [minX, maxX, minY, maxY] = getMinMax(points);
   points = points.map(p => translatePoint(p, minX, minY));
@@ -127,10 +127,9 @@ function printImage(set: Set<string>, mode: Mode, padding = 4): void {
   for (const { x, y } of points) {
     image[y + padding][x + padding] = mode === 'lit' ? '#' : '.';
   }
-  console.log();
-  for (const row of image) {
-    console.log(row.join(''));
-  }
+  return image.reduce((imageStr, row) => (
+    imageStr + row.join('') + '\n'
+  ), '');
 }
 
 function getMinMax(points: Point[]): number[] {
