@@ -10,7 +10,7 @@ console.log(solve(p1Start, p2Start));
 
 function solve(p1Start: number, p2Start: number): number {
   const memo = new Map<string, number[]>();
-  const wins = playGame(p1Start, p2Start, 0, 0, true, 3, 0, [0, 0], memo);
+  const wins = playGame(p1Start, p2Start, 0, 0, true, 3, 0, memo);
   return Math.max(...wins);
 }
 
@@ -22,7 +22,6 @@ function playGame(
   isP1Turn: boolean,
   numRemainingRolls: number,
   moveSum: number,
-  wins: number[],
   memo: Map<string, number[]>,
 ): number[] {
   const ss = serializeState(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls, moveSum);
@@ -32,6 +31,7 @@ function playGame(
   if (p1Score >= 21 || p2Score >= 21) {
     return [(p1Score >= 21 ? 1 : 0), (p2Score >= 21 ? 1 : 0)];
   }
+  const results: number[][] = [];
   if (numRemainingRolls === 0) {
     if (isP1Turn) {
       p1Pos = ((p1Pos + moveSum - 1) % 10) + 1;
@@ -40,16 +40,13 @@ function playGame(
       p2Pos = ((p2Pos + moveSum - 1) % 10) + 1;
       p2Score += p2Pos;
     }
-    const result = playGame(p1Pos, p2Pos, p1Score, p2Score, !isP1Turn, 3, 0, [...wins], memo);
-    wins[0] += result[0];
-    wins[1] += result[1];
+    results.push(playGame(p1Pos, p2Pos, p1Score, p2Score, !isP1Turn, 3, 0, memo));
   } else { // numRemainingRolls > 0
-    const result1 = playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 1, [...wins], memo);
-    const result2 = playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 2, [...wins], memo);
-    const result3 = playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 3, [...wins], memo);
-    wins[0] += result1[0] + result2[0] + result3[0];
-    wins[1] += result1[1] + result2[1] + result3[1];
+    results.push(playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 1, memo));
+    results.push(playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 2, memo));
+    results.push(playGame(p1Pos, p2Pos, p1Score, p2Score, isP1Turn, numRemainingRolls - 1, moveSum + 3, memo));
   }
+  const wins = results.reduce((total, result) => total.map((e, i) => e + result[i]));
   memo.set(ss, wins);
   return wins;
 }
