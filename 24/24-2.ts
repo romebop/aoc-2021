@@ -48,7 +48,7 @@ function solve(validDigits: number[], digitInfos: DigitInfo[]): number | void {
                     z = Math.floor(z / 26);
                   }
                 }
-                return +modelDigits.join('');
+                if (z === 0) return +modelDigits.join('');
               }
             }
           }
