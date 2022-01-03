@@ -2,6 +2,7 @@
 .eslintignore
 .vscode
 *.txt
+!24/24.input.txt
 new_day.sh
 node_modules
 package.json
