@@ -91,39 +91,38 @@ function serializePoint({ x, y, z }: Point) {
 
 // TODO: SO(3) Lie Group
 function getOrientations({ x, y, z }: Point): Point[] { // 6 directions * 4 rotations
-  const orientations: Point[] = [];
-  // +x
-  orientations.push({ x, y, z });
-  orientations.push({ x, y: -z, z: y });
-  orientations.push({ x, y: -y, z: -z });
-  orientations.push({ x, y: z, z: -y });
-  // -x
-  orientations.push({ x: -x, y: -y, z });
-  orientations.push({ x: -x, y: z, z: y });
-  orientations.push({ x: -x, y, z: -z });
-  orientations.push({ x: -x, y: -z, z: -y });
-  // +y
-  orientations.push({ x: y, y: z, z: x });
-  orientations.push({ x: y, y: -x, z });
-  orientations.push({ x: y, y: -z, z: -x });
-  orientations.push({ x: y, y: x, z: -z });
-  // -y
-  orientations.push({ x: -y, y: -z, z: x });
-  orientations.push({ x: -y, y: x, z });
-  orientations.push({ x: -y, y: z, z: -x });
-  orientations.push({ x: -y, y: -x, z: -z });
-  // +z
-  orientations.push({ x: z, y: x, z: y });
-  orientations.push({ x: z, y: -y, z: x });
-  orientations.push({ x: z, y: -x, z: -y });
-  orientations.push({ x: z, y, z: -x });
-  // -z
-  orientations.push({ x: -z, y: -x, z: y });
-  orientations.push({ x: -z, y, z: x });
-  orientations.push({ x: -z, y: x, z: -y });
-  orientations.push({ x: -z, y: -y, z: -x });
-
-  return orientations;
+  return [
+    // +x
+    { x, y, z },
+    { x, y: -z, z: y },
+    { x, y: -y, z: -z },
+    { x, y: z, z: -y },
+    // -x
+    { x: -x, y: -y, z },
+    { x: -x, y: z, z: y },
+    { x: -x, y, z: -z },
+    { x: -x, y: -z, z: -y },
+    // +y
+    { x: y, y: z, z: x },
+    { x: y, y: -x, z },
+    { x: y, y: -z, z: -x },
+    { x: y, y: x, z: -z },
+    // -y
+    { x: -y, y: -z, z: x },
+    { x: -y, y: x, z },
+    { x: -y, y: z, z: -x },
+    { x: -y, y: -x, z: -z },
+    // +z
+    { x: z, y: x, z: y },
+    { x: z, y: -y, z: x },
+    { x: z, y: -x, z: -y },
+    { x: z, y, z: -x },
+    // -z
+    { x: -z, y: -x, z: y },
+    { x: -z, y, z: x },
+    { x: -z, y: x, z: -y },
+    { x: -z, y: -y, z: -x },
+  ];
 }
 
 // 48 (includes mirrors)
